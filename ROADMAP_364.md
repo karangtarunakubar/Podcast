@@ -1,6 +1,7 @@
 # Table ROADMAP_364
 
-```Minggu / Hari,Kuartal,Track / Tema Proyek,Fokus Topik Utama,Status Bintang Tamu,Target Rilis
+```
+Minggu / Hari,Kuartal,Track / Tema Proyek,Fokus Topik Utama,Status Bintang Tamu,Target Rilis
 Minggu 1-4 (Hari 1–28),Q1,Track 1: Software Architecture,"System Design, Microservices, Scalability",Confirmed,Minggu 1–4
 Minggu 5-8 (Hari 29–56),Q1,Track 2: Open Source Journey,"Building Open Source, Community, License",In Contact,Minggu 5–8
 Minggu 9-13 (Hari 57–91),Q1,Track 3: DevOps & Cloud,"Kubernetes, CI/CD Pipelines, Cost Optimization",Outreach,Minggu 9–13
