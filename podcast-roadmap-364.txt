@@ -1,0 +1,17 @@
+podcast-roadmap-364/
+├── README.md                     # Overview tahunan & Indeks Proyek
+├── ROADMAP_364.md                # Tabel Matrix 52 Minggu / 364 Hari
+├── .github/
+│   └── ISSUE_TEMPLATE/
+│       ├── episode_planning.md   # Template draf proyek episode
+│       └── guest_outreach.md     # Template pendaftaran & kontak guest
+├── TRACKS/                       # Pengelompokan Tema Proyek
+│   ├── track-1-dev-engineering.md
+│   ├── track-2-open-source.md
+│   ├── track-3-career-tech.md
+│   └── track-4-future-ai.md
+└── EPISODES/                     # Folder per episode
+    ├── ep-01-to-13-Q1/
+    ├── ep-14-to-26-Q2/
+    ├── ep-27-to-39-Q3/
+    └── ep-40-to-52-Q4/
