@@ -18,7 +18,7 @@ cd Podcast
 
 2. Buka file index.html langsung di browser favorit Anda.
 ​🌐 Live Web App
-https://karangtarunakubar.github.io/podcast
+https://karangtaruna.kubar/podcast
 5. Push Kode ke GitHub & Aktifkan GitHub Pages
 ​Jalankan perintah berikut di terminal Anda untuk mengirim seluruh kode ke GitHub:
 
