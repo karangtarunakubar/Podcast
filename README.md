@@ -14,4 +14,16 @@ Aplikasi web studio podcast berbasis **Neumorphic UI** yang mendukung perekaman 
 1. *Clone* repositori ini:
    ```bash
    git clone [https://github.com/karangtarunakubar/podcast.git](https://github.com/karangtarunakubar/podcast.git)
+cd Podcast
+
+2. Buka file index.html langsung di browser favorit Anda.
+​🌐 Live Web App
+https://karangtarunakubar.github.io/podcast
+5. Push Kode ke GitHub & Aktifkan GitHub Pages
+​Jalankan perintah berikut di terminal Anda untuk mengirim seluruh kode ke GitHub:
+
+# Push ke repositori main
+git add .
+git commit -m "feat: initial commit podcast studio with approve all permissions"
+git push -u origin main
 
