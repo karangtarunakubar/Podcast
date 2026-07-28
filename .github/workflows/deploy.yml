@@ -1,0 +1,48 @@
+🌏 Live Web App
+
+## Github Pages:
+https://karangtarunakubar.github.io/podcast
+---
+
+## 4. Automation Deploy dengan GitHub Actions (`deploy.yml`)
+
+Buat file `.github/workflows/deploy.yml` agar aplikasi web otomatis dipublikasikan ke **GitHub Pages** setiap kali Anda melakukan `git push`:
+
+```yaml
+name: Deploy Podcast Studio to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
