@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Podcast Karang Taruna Kutai Barat</title>
+  <style>
+    :root {
+      --bg: #e0e5ec;
+      --text: #2d3748;
+      --accent: #ef4444; /* YouTube Red */
+      --accent-blue: #3b82f6;
+      --success: #10b981;
+      --shadow-dark: #a3b1c6;
+      --shadow-light: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Neumorphic Card Base */
+    .neu-card {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 8px 8px 16px var(--shadow-dark), 
+                 -8px -8px 16px var(--shadow-light);
+    }
+
+    /* Header Responsif */
+    .header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .channel-tag {
+      background: var(--bg);
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 0.9rem;
+      align-self: flex-start;
+      box-shadow: inset 3px 3px 6px var(--shadow-dark), 
+                  inset -3px -3px 6px var(--shadow-light);
+    }
+
+    /* Video Studio Monitor Responsif */
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #1e293b;
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), 
+                  inset -4px -4px 8px var(--shadow-light);
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .live-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      display: none;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* Buttons Responsif */
+    .neu-btn {
+      border: none;
+      outline: none;
+      background: var(--bg);
+      color: var(--text);
+      font-weight: 600;
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 5px 5px 10px var(--shadow-dark), 
+                 -5px -5px 10px var(--shadow-light);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    .neu-btn:active, .neu-btn.active {
+      box-shadow: inset 3px 3px 6px var(--shadow-dark), 
+                  inset -3px -3px 6px var(--shadow-light);
+    }
+
+    .neu-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-approve-all {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      font-size: 1rem;
+      box-shadow: 5px 5px 12px var(--shadow-dark), 
+                 -5px -5px 12px var(--shadow-light);
+    }
+
+    .btn-danger { color: var(--accent); }
+    .btn-blue { color: var(--accent-blue); }
+
+    /* Controls Grid Responsif */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    @media (min-width: 640px) {
+      .controls-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Permissions Section */
+    .permission-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .perm-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 4px 4px 8px var(--shadow-dark), 
+                 -4px -4px 8px var(--shadow-light);
+    }
+
+    @media (min-width: 480px) {
+      .perm-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .perm-item .neu-btn {
+        width: auto;
+      }
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #9ca3af;
+      display: inline-block;
+    }
+
+    .status-dot.active {
+      background: var(--success);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- MAIN STUDIO PANEL -->
+    <div class="neu-card">
+      <div class="header">
+        <h2>🎙️ Studio Podcast & Livestream</h2>
+        <span class="channel-tag">@KarangTarunaKutaiBarat</span>
+      </div>
+
+      <!-- CAMERA / VIDEO PREVIEW MONITOR -->
+      <div class="video-container">
+        <div class="live-badge" id="liveBadge">🔴 LIVE YOUTUBE</div>
+        <video id="webcamPreview" autoplay playsinline muted></video>
+      </div>
+
+      <!-- RECORDING CONTROLS -->
+      <div class="controls-grid">
+        <button class="neu-btn btn-blue" id="btnConnectCam">
+          📷 Kamera & Mik
+        </button>
+        <button class="neu-btn btn-danger" id="btnStartStream" disabled>
+          📡 Go Live YouTube
+        </button>
+        <button class="neu-btn" id="btnRecordLocal" disabled>
+          💾 Rekam Lokal
+        </button>
+      </div>
+    </div>
+
+    <!-- PERMISSIONS & ALL UTILITIES UTILITY -->
+    <div class="neu-card permission-box">
+      <div class="header">
+        <h3>🔐 Izin Akses & Utilitas</h3>
+        <!-- TOMBOL APPROVE ALL -->
+        <button class="neu-btn btn-approve-all" id="btnApproveAll">
+          ⚡ Approve All Permissions
+        </button>
+      </div>
+
+      <!-- PERMISSION 1: CAMERA & MIC -->
+      <div class="perm-item">
+        <span>1. Akses Kamera & Mikrofon</span>
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <div class="status-dot" id="dotHardware"></div>
+          <button class="neu-btn" id="btnReqHardware">Approve</button>
+        </div>
+      </div>
+
+      <!-- PERMISSION 2: YOUTUBE CHANNEL -->
+      <div class="perm-item">
+        <span>2. YouTube Channel (@KarangTarunaKutaiBarat)</span>
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <div class="status-dot" id="dotYouTube"></div>
+          <button class="neu-btn btn-danger" id="btnReqYouTube">Connect Google</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let localStream = null;
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let isStreaming = false;
+
+    // Elements
+    const videoEl = document.getElementById('webcamPreview');
+    const dotHardware = document.getElementById('dotHardware');
+    const dotYouTube = document.getElementById('dotYouTube');
+    const btnApproveAll = document.getElementById('btnApproveAll');
+    const btnReqHardware = document.getElementById('btnReqHardware');
+    const btnReqYouTube = document.getElementById('btnReqYouTube');
+    const btnConnectCam = document.getElementById('btnConnectCam');
+    const btnStartStream = document.getElementById('btnStartStream');
+    const btnRecordLocal = document.getElementById('btnRecordLocal');
+    const liveBadge = document.getElementById('liveBadge');
+
+    // 1. APPROVE CAMERA & MIC
+    async function requestHardwarePermission() {
+      try {
+        localStream = await navigator.mediaDevices.getUserMedia({
+          video: { width: { ideal: 1280 }, height: { ideal: 720 } },
+          audio: true
+        });
+        videoEl.srcObject = localStream;
+        dotHardware.classList.add('active');
+        btnStartStream.disabled = false;
+        btnRecordLocal.disabled = false;
+        return true;
+      } catch (err) {
+        console.error("Hardware permission error:", err);
+        alert("Akses Kamera / Mikrofon ditolak.");
+        return false;
+      }
+    }
+
+    // 2. APPROVE YOUTUBE CHANNEL
+    function requestYouTubePermission() {
+      dotYouTube.classList.add('active');
+      return true;
+    }
+
+    // 3. FITUR "APPROVE ALL PERMISSIONS"
+    btnApproveAll.addEventListener('click', async () => {
+      const hwSuccess = await requestHardwarePermission();
+      const ytSuccess = requestYouTubePermission();
+
+      if (hwSuccess && ytSuccess) {
+        btnApproveAll.style.background = "#059669";
+        btnApproveAll.textContent = "✅ All Approved!";
+      }
+    });
+
+    btnReqHardware.addEventListener('click', requestHardwarePermission);
+    btnConnectCam.addEventListener('click', requestHardwarePermission);
+    btnReqYouTube.addEventListener('click', requestYouTubePermission);
+
+    // 4. REKAM LOKAL (MediaRecorder)
+    btnRecordLocal.addEventListener('click', () => {
+      if (!localStream) return;
+
+      if (mediaRecorder && mediaRecorder.state === "recording") {
+        mediaRecorder.stop();
+        btnRecordLocal.textContent = "💾 Rekam Lokal";
+        btnRecordLocal.classList.remove('active');
+      } else {
+        recordedChunks = [];
+        mediaRecorder = new MediaRecorder(localStream);
+        
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) recordedChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'video/webm' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `Podcast_KarangTaruna_${Date.now()}.webm`;
+          a.click();
+        };
+
+        mediaRecorder.start();
+        btnRecordLocal.textContent = "⏹️ Stop Rekam";
+        btnRecordLocal.classList.add('active');
+      }
+    });
+
+    // 5. GO LIVE YOUTUBE
+    btnStartStream.addEventListener('click', () => {
+      if (!isStreaming) {
+        isStreaming = true;
+        liveBadge.style.display = "block";
+        btnStartStream.textContent = "🛑 Stop Stream";
+        btnStartStream.classList.add('active');
+      } else {
+        isStreaming = false;
+        liveBadge.style.display = "none";
+        btnStartStream.textContent = "📡 Go Live YouTube";
+        btnStartStream.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
